@@ -24,3 +24,4 @@ def main(x):
     print(fibs( 40 ))
     return ( 1 );
 
+main(1)
