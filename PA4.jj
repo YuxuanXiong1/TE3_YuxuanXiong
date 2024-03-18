@@ -1,5 +1,5 @@
 /*
- * This is MiniC_v4.jj file.
+ * This is PA4.jj file.
  * It will build a tree we can traverse using the Visitor pattern!
  * The language is MiniC, which is the subset of MiniJava
  * consisting of only MethodDecls (i.e. no classes or instance variables)
@@ -13,14 +13,14 @@ options {
   IGNORE_CASE=false;
 }
 
-PARSER_BEGIN(MiniC_v4)
+PARSER_BEGIN(PA4)
 import syntaxtree.*;
 
-public class MiniC_v4 {
+public class PA4 {
 
   /** Main entry point. */
   public static void main(String args[]) {
-    MiniC_v4 t = new MiniC_v4(System.in);
+    PA4 t = new PA4(System.in);
     try {
       MethodDeclList n = t.Start();
 
@@ -45,21 +45,21 @@ public class MiniC_v4 {
       System.out.println("PROGRAM Demo;\n");
       System.out.println(s);
       System.out.println("BEGIN\n main(1);\nEND.");
-*/
+
 
 /* uncomment this only for PA4c and PA4d */
-      System.out.println("\n\nGenerating Symbol Table");
-      SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
-      SymbolTable st = v3.symbolTable;
-      n.accept(v3,"");
-      System.out.println(st);
+//      System.out.println("\n\nGenerating Symbol Table");
+//      SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
+//      SymbolTable st = v3.symbolTable;
+//      n.accept(v3,"");
+//      System.out.println(st);
 
 
 /* uncomment this only for PA4d  */
-      System.out.println("\n\nType Checking");
-      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
-      n.accept(v4,"");
-      System.out.println(v4.num_errors+" type errors found");
+//      System.out.println("\n\nType Checking");
+//      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
+//      n.accept(v4,"");
+//      System.out.println(v4.num_errors+" type errors found");
 
       //System.out.println("\n\nDone!");
 
@@ -73,7 +73,7 @@ public class MiniC_v4 {
 
 }
 
-PARSER_END(MiniC_v4)
+PARSER_END(PA4)
 
 SKIP: /* Whitespace */
 {
@@ -188,11 +188,9 @@ MethodDeclList MethodDecls() :
   MethodDecl m;
 }
 { 
-  (
-    (  m=MethodDecl() 
-       {mlist = new MethodDeclList(m,mlist);}
-    )*
-  ) 
+  (  m=MethodDecl()
+     {mlist = new MethodDeclList(m,mlist);}
+  )*
   {return mlist;}
 }
 
