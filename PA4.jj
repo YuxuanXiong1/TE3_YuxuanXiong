@@ -15,11 +15,14 @@ options {
 
 PARSER_BEGIN(PA4)
 import syntaxtree.*;
+import java.io.*;
+import java.io.PrintStream;
+
 
 public class PA4 {
 
   /** Main entry point. */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ParseException, IOException{
     PA4 t = new PA4(System.in);
     try {
       MethodDeclList n = t.Start();
@@ -38,13 +41,15 @@ public class PA4 {
       System.out.println(s);
 */
 
-/* uncomment this only for MiniC2Pascal translator
-      //System.out.println("\n\nPretty Print the Program");
-      Visitor v2 = new Pascal_Visitor();  // pretty prints the MiniC program
+      //uncomment this only for MiniC2Pascal translator
+      System.out.println("\n\nPretty Print the Program");
+      Visitor v2 = new C2Python_Visitor();  // pretty prints the MiniC program
       String s = (String) n.accept(v2, 0);
-      System.out.println("PROGRAM Demo;\n");
+      PrintStream originalOut = System.out;
+      PrintStream fileOut = new PrintStream("./C2Python_Visitor.py");
+      System.setOut(fileOut);
       System.out.println(s);
-      System.out.println("BEGIN\n main(1);\nEND.");
+      fileOut.close();
 
 
 /* uncomment this only for PA4c and PA4d */
